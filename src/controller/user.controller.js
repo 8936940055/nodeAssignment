@@ -46,4 +46,20 @@ const deleteUserById = async (req, res) => {
         res.status(500).json(error);
     }
 };
-module.exports = { getUsers, createUser, getUserByID, updateUser, deleteUserById };
+
+const loginUser = async (req, res) => {
+    try {
+        const { userName, password } = req.query;
+        const user = await Users.find({ userName, password }, { userName: 1 });
+        user.length ? res.status(200).json({
+            message: 'User logged in successfully',
+            data: user
+        }) : res.status(400).json({
+            message: 'Error in login, userName or password did not match'
+        });
+
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+module.exports = { getUsers, createUser, getUserByID, updateUser, deleteUserById, loginUser };
