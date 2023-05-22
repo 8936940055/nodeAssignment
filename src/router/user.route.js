@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/", getUsers);
 
-console.log("desfsdfssd");
+
 router.post("/", createUser);
 
 router.get("/:uid", getUserByID);
